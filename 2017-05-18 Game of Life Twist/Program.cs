@@ -22,7 +22,7 @@ namespace _2017_05_18_Game_of_Life_Twist
             lb.PrintBoard();
             lb.IterateBoard(true);
             lb.PrintBoard();
-            //Console.ReadLine();
+            Console.ReadLine();
         }
     }
 
@@ -97,18 +97,10 @@ namespace _2017_05_18_Game_of_Life_Twist
             {
                 currentCell = numHash > numStar ? '#' : '*';
             }
-            // cell on, 2 or 3 neighbors
-            if (currentCell != '.')
+            // cell on, undercrowd or overpop
+            if (cellsOn < 3 || cellsOn > 4)
             {
-                cellsOn--;
-                if (cellsOn < 2)
-                {
-                    currentCell = '.';
-                }
-                if (cellsOn > 3)
-                {
-                    currentCell = '.';
-                }
+                currentCell = '.';
             }
 
             return currentCell;
@@ -181,23 +173,6 @@ namespace _2017_05_18_Game_of_Life_Twist
         {
             while (y < 0) y += H;
             return y % H;
-        }
-    }
-
-    class ColorLogger
-    {
-        private static Dictionary<char, ConsoleColor> colorScheme =
-            new Dictionary<char, ConsoleColor>
-            {
-                { '.', ConsoleColor.Gray },
-                { '#', ConsoleColor.Cyan },
-                { '*', ConsoleColor.Red },
-            };
-
-        public static void Write(char value)
-        {
-            Console.ForegroundColor = colorScheme[value];
-            Console.Write(value);
         }
     }
 }
